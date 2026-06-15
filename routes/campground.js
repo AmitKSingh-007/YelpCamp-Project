@@ -4,6 +4,7 @@ const catchAsync = require('../Utils/catchAsync.js');
 const ExpressError = require('../Utils/ExpressError');
 const Campground = require('../models/campground');
 const { campgroundSchema } = require('../Schemas');
+const { isLoggedIn } = require('../middleware.js');
 
 // INDEX ROUTE
 
@@ -28,7 +29,7 @@ const validateCampground = (req, res, next) => {
 
 // NEW ROUTE
 
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
     res.render('campgrounds/new');
 });
 
@@ -37,6 +38,7 @@ router.get('/new', (req, res) => {
 
 router.post(
     '/',
+    isLoggedIn,
     validateCampground,
     catchAsync(async (req, res) => {
 
@@ -70,7 +72,7 @@ router.get('/:id', catchAsync(async (req, res) => {
 
 // EDIT ROUTE
 
-router.get('/:id/edit', catchAsync(async (req, res) => {
+router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
 
     const { id } = req.params;
 
@@ -89,6 +91,7 @@ router.get('/:id/edit', catchAsync(async (req, res) => {
 
 router.put(
     '/:id',
+    isLoggedIn,
     validateCampground,
     catchAsync(async (req, res) => {
 
@@ -113,7 +116,7 @@ router.put(
 
 // DELETE ROUTE
 
-router.delete('/:id', catchAsync(async (req, res) => {
+router.delete('/:id', isLoggedIn, catchAsync(async (req, res) => {
 
     const { id } = req.params;
 
