@@ -1,40 +1,123 @@
 <% layout('layouts/boilerplate') -%>
-<div class="row">
-    <h1 class="text-center">New Campground</h1>
-    <div class="col-6 offset-3">
-        <form action="/campgrounds" method="POST" novalidate class="validated-form">
-        <div class="mb-3">
-            <label class="form-label" for="title">Title</label>
-            <input class="form-control" type="text" name="campground[title]" id="title" required>
-            <div class="valid-feedback">Looks good!</div>
+<link rel="stylesheet" href="/stylesheets/campnew.css">
+
+<div class="container py-5">
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="text-center mb-4">
+            <h1 class="display-5 fw-bold">🏕️ Create New Campground</h1>
+            <p class="text-muted">
+                Share an amazing camping destination with the community.
+            </p>
         </div>
-        <div class="mb-3">
-            <label class="form-label" for="location">Location</label>
-            <input class="form-control" type="text" name="campground[location]" id="location" required>
-            <div class="valid-feedback">Looks good!</div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="image">Image URL</label>
-            <input class="form-control" type="text" name="campground[image]" id="image" required>
-            <div class="valid-feedback">Looks good!</div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="price">Campground Price</label>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="price-label">$</span>
-                <input type="text" class="form-control" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="campground[price]" required>
-                <div class="valid-feedback">Looks good!</div>
+
+        <div class="card shadow-lg border-0 rounded-4">
+
+            <div class="card-body p-4 p-md-5">
+
+                <form action="/campgrounds" method="POST" novalidate class="validated-form">
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold" for="title">
+                            Campground Name
+                        </label>
+                        <input
+                            class="form-control form-control-lg"
+                            type="text"
+                            name="campground[title]"
+                            id="title"
+                            placeholder="e.g. Yosemite Valley Camp"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold" for="location">
+                            Location
+                        </label>
+                        <input
+                            class="form-control form-control-lg"
+                            type="text"
+                            name="campground[location]"
+                            id="location"
+                            placeholder="e.g. California, USA"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold" for="image">
+                            Image URL
+                        </label>
+                        <input
+                            class="form-control form-control-lg"
+                            type="url"
+                            name="campground[image]"
+                            id="image"
+                            placeholder="https://example.com/image.jpg"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">
+                            Price Per Night
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+
+                            <input
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                class="form-control form-control-lg"
+                                name="campground[price]"
+                                placeholder="49.99"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold" for="description">
+                            Description
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            rows="5"
+                            name="campground[description]"
+                            id="description"
+                            placeholder="Describe the campground, nearby attractions, amenities, and what makes it special..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success btn-lg rounded-3">
+                            Publish Campground
+                        </button>
+
+                        <a
+                            href="/campgrounds"
+                            class="btn btn-outline-secondary"
+                        >
+                            Cancel
+                        </a>
+                    </div>
+
+                </form>
+
             </div>
+
         </div>
-        <div class="mb-3">
-            <label class="form-label" for="description">Description</label>
-            <textarea class="form-control" type="text" name="campground[description]" id="description" required></textarea>
-            <div class="valid-feedback">Looks good!</div>
-        </div>
-        <div class="mb-3">
-            <button class="btn btn-success">Add Campground</button>
-        </div>
-        </form>
 
     </div>
+
+</div>
+
 </div>
