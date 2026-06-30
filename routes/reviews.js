@@ -3,7 +3,7 @@ const router = express.Router({ mergeParams: true });
 
 const reviews = require('../controllers/reviews');
 
-const catchAsync = require('../Utils/catchAsync');
+const catchAsync = require('../utils/catchAsync');
 
 const {
     isLoggedIn,

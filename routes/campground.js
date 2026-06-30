@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const upload = require("../middleware/upload");
 
 const campgrounds = require('../controllers/campgrounds');
-const catchAsync = require('../Utils/catchAsync');
+const catchAsync = require('../utils/catchAsync');
 
 const {
     isLoggedIn,
@@ -20,6 +21,7 @@ router.route('/')
     )
     .post(
         isLoggedIn,
+        upload.array("images", 5),
         validateCampground,
         catchAsync(campgrounds.createCampground)
     );
@@ -45,6 +47,7 @@ router.route('/:id')
     .put(
         isLoggedIn,
         isAuthor,
+        upload.array("images", 5),
         validateCampground,
         catchAsync(campgrounds.updateCampground)
     )

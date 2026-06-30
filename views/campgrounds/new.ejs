@@ -18,7 +18,7 @@
 
             <div class="card-body p-4 p-md-5">
 
-                <form action="/campgrounds" method="POST" novalidate class="validated-form">
+                <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
 
                     <div class="mb-4">
                         <label class="form-label fw-semibold" for="title">
@@ -35,6 +35,19 @@
                     </div>
 
                     <div class="mb-4">
+                        <label class="form-label fw-semibold" for="images">
+                            Images
+                        </label>
+                        <input
+                            class="form-control form-control-lg"
+                            type= "file"
+                            name="images"
+                            id="images"
+                            multiple
+                        >
+                    </div>
+
+                    <div class="mb-4">
                         <label class="form-label fw-semibold" for="location">
                             Location
                         </label>
@@ -44,20 +57,6 @@
                             name="campground[location]"
                             id="location"
                             placeholder="e.g. California, USA"
-                            required
-                        >
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="form-label fw-semibold" for="image">
-                            Image URL
-                        </label>
-                        <input
-                            class="form-control form-control-lg"
-                            type="url"
-                            name="campground[image]"
-                            id="image"
-                            placeholder="https://example.com/image.jpg"
                             required
                         >
                     </div>
