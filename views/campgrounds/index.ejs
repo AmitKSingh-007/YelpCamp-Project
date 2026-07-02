@@ -1,87 +1,63 @@
 <% layout('layouts/boilerplate') -%>
 <link rel="stylesheet" href="/stylesheets/campIdx.css">
+<link rel="stylesheet" href="/stylesheets/map.css">
 
 <div class="container py-5">
 
-    <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <div>
-            <h1 class="display-5 fw-bold">🏕️ Explore Campgrounds</h1>
-            <p class="text-muted mb-0">
-                Discover amazing places to camp around the world.
-            </p>
-        </div>
-
-        <a href="/campgrounds/new" class="btn btn-success btn-lg">
-            + Add Campground
-        </a>
+  <div class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <h1 class="display-5 fw-bold">🏕️ Explore Campgrounds</h1>
+      <p class="text-muted mb-0">
+        Discover amazing places to camp around the world.
+      </p>
     </div>
+    <a href="/campgrounds/new" class="btn btn-success btn-lg">
+      + Add Campground
+    </a>
+  </div>
 
-    <!-- Campgrounds -->
-    <% for (let campground of campgrounds) { %>
+  <div id="map" class="mb-5"></div>
 
-        <div class="card shadow-sm border-0 rounded-4 mb-4 campground-card overflow-hidden">
-
-            <div class="row g-0">
-
-                <div class="col-md-4">
-
-                    <% if (campground.images.length > 0) { %>
-
-                        <img
-                            src="<%= campground.images[0].url %>"
-                            class="img-fluid h-100 w-100 object-fit-cover"
-                            alt="<%= campground.title %>"
-                            style="min-height:250px;"
-                        >
-
-                    <% } else { %>
-
-                        <img
-                            src="/images/no-image.png"
-                            class="img-fluid h-100 w-100 object-fit-cover"
-                            alt="No Image Available"
-                            style="min-height:250px;"
-                        >
-
-                    <% } %>
-
-                </div>
-
-                <div class="col-md-8">
-
-                    <div class="card-body p-4">
-
-                        <h3 class="card-title fw-bold">
-                            <%= campground.title %>
-                        </h3>
-
-                        <p class="card-text text-muted">
-                            <%= campground.description.substring(0, 180) %>...
-                        </p>
-
-                        <p class="card-text">
-                            <i class="bi bi-geo-alt-fill text-danger"></i>
-                            <span class="text-secondary">
-                                <%= campground.location %>
-                            </span>
-                        </p>
-
-                        <a
-                            href="/campgrounds/<%= campground._id %>"
-                            class="btn btn-outline-success rounded-pill px-4"
-                        >
-                            View Details →
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+  <% for (let campground of campgrounds) { %>
+    <div class="card shadow-sm border-0 rounded-4 mb-4 campground-card overflow-hidden">
+      <div class="row g-0">
+        
+        <div class="col-md-4">
+          <% if (campground.images.length > 0) { %>
+            <img src="<%= campground.images[0].url %>" class="img-fluid h-100 w-100 object-fit-cover" alt="<%= campground.title %>" style="min-height:250px;">
+          <% } else { %>
+            <img src="/images/no-image.png" class="img-fluid h-100 w-100 object-fit-cover" alt="No Image Available" style="min-height:250px;">
+          <% } %>
         </div>
 
-    <% } %>
+        <div class="col-md-8">
+          <div class="card-body p-4">
+            <h3 class="card-title fw-bold">
+              <%= campground.title %>
+            </h3>
+            <p class="card-text text-muted">
+              <%= campground.description.substring(0, 180) %>...
+            </p>
+            <p class="card-text">
+              <i class="bi bi-geo-alt-fill text-danger"></i>
+              <span class="text-secondary">
+                <%= campground.location %>
+              </span>
+            </p>
+            <a href="/campgrounds/<%= campground._id %>" class="btn btn-outline-success rounded-pill px-4">
+              View Details →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <% } %>
+
+  <script>
+    const mapData = <%- JSON.stringify(mapData) %>;
+    const maptilerApiKey = "<%= process.env.MAPTILER_API_KEY %>";
+  </script>
+  <script src="/javascripts/clusterMap.js"></script>
 
 </div>

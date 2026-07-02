@@ -2,9 +2,20 @@ const Campground = require('../models/campground');
 
 const { uploadImage, deleteImage } = require("../services/imageService");
 
+const { geocodeLocation } = require("../services/geocodingService");
+
 module.exports.index = async (req, res) => {
+
     const campgrounds = await Campground.find({});
-    res.render('campgrounds/index', { campgrounds });
+
+    const mapData = campgrounds.map(campground => ({
+        _id : campground._id,
+        title: campground.title,
+        location: campground.location,
+        geometry: campground.geometry
+    }));
+
+    res.render('campgrounds/index', { campgrounds, mapData });
 };
 
 module.exports.renderNewForm = (req, res) => {
@@ -21,6 +32,7 @@ module.exports.createCampground = async (req, res) => {
 
         campground.author = req.user._id;
 
+        campground.geometry = await geocodeLocation(campground.location);
 
         for (const file of req.files) {
             const image = await uploadImage(file.path)
@@ -104,9 +116,15 @@ module.exports.updateCampground = async (req, res) => {
 
     }
 
+    const oldLocation = campground.location;
+
     Object.assign(campground, req.body.campground);
 
     try {
+
+        if (oldLocation !== campground.location) {
+            campground.geometry = await geocodeLocation(campground.location);
+        }
 
         for (const file of req.files) {
             const image = await uploadImage(file.path)
