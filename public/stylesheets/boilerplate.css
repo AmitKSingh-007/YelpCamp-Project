@@ -1,0 +1,12 @@
+
+.hover-link-light {
+    transition: color 0.2s ease-in-out;
+}
+
+.hover-link-light:hover {
+    color: #ffffff !important;
+}
+
+.transition-base {
+    transition: all 0.2s ease-in-out;
+}

@@ -1,5 +1,5 @@
-if (process.env.NODE_ENV !== "production"){
-    require('dotenv').config({quiet: true});
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config({ quiet: true });
 }
 
 const express = require('express');
@@ -13,6 +13,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user.js');
+const Campground = require("./models/campground.js");
 
 //ROUTES EXPORT
 const campgroundRoutes = require('./routes/campground.js');
@@ -75,8 +76,13 @@ app.use((req, res, next) => {
 
 // HOME ROUTE
 
-app.get('/', (req, res) => {
-    res.send('Hello from YelpCamp!!');
+app.get('/', async (req, res) => {
+
+    const featuredCampgrounds = await Campground.find({})
+        .sort({ createdAt: -1 })
+        .limit(3);
+
+    res.render("campgrounds/home", { featuredCampgrounds });
 });
 
 //CAMPGROUND ROUTES

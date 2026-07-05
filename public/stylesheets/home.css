@@ -1,0 +1,98 @@
+/* Existing Classes */
+.hero-text {
+    max-width: 550px;
+}
+
+.section-description {
+    max-width: 700px;
+}
+
+.featured-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 .25rem .75rem rgba(0,0,0,.08);
+    transition: all .3s ease;
+}
+
+.featured-card-image {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.featured-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .3s ease;
+}
+
+.featured-card-content {
+    padding: 1.5rem;
+}
+
+.featured-card-content h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: .5rem;
+}
+
+.featured-card-content p {
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+.featured-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 .75rem 2rem rgba(0,0,0,.15);
+}
+
+.featured-card:hover img {
+    transform: scale(1.05);
+}
+
+/* ==========================================
+   NEW STYLES (Phases 3, 4, 5)
+   ========================================== */
+
+/* Phase 3: Feature Cards */
+.feature-card {
+    background: transparent;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    display: inline-block;
+}
+
+/* Phase 4: CTA micro-interactions */
+.cta-banner {
+    background: linear-gradient(135deg, #198754 0%, #146c43 100%) !important;
+}
+
+.opacity-90 {
+    opacity: 0.9;
+}
+
+.hover-grow {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-grow:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Phase 5: Footer Link Styling */
+.hover-link {
+    transition: color 0.2s ease;
+}
+
+.hover-link:hover {
+    color: #198754 !important;
+}
