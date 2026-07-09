@@ -227,13 +227,15 @@ app.all('/{*path}', (req, res, next) => {
 
 app.use((err, req, res, next) => {
 
+    console.error(err);
+
     const { statusCode = 500 } = err;
 
     if (!err.message) {
-        err.message = 'Oh No, Something Went Wrong!';
+        err.message = "Oh No, Something Went Wrong!";
     }
 
-    res.status(statusCode).render('error', { err });
+    res.status(statusCode).render("error", { err });
 });
 
 
