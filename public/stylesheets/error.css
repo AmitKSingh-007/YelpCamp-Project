@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+.error-page-wrapper {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #f4f7f5;
+    position: relative;
+    overflow: hidden;
+}
+
+/* New Responsive Spacing Classes */
+@media (min-width: 768px) {
+    .p-md-6 {
+        padding: 4rem !important;
+    }
+}
+
+.fw-black {
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.fs-7 {
+    font-size: 0.78rem;
+}
+
+.fs-7.5 {
+    font-size: 0.85rem;
+}
+
+.fs-5-light {
+    font-size: 1.1rem;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.p-3.5 {
+    padding: 1.15rem !important;
+}
+
+.flex-sm-1 {
+    flex: 1;
+}
+
+.nature-bg-elements {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.4;
+    background-image:
+        radial-gradient(circle at 15% 25%, rgba(21, 128, 61, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(234, 88, 12, 0.05) 0%, transparent 45%);
+}
+
+/* Expanded Card Setup */
+.error-card {
+    max-width: 680px;
+    /* Limits giant growth over ultra-wide displays while feeling generous */
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.06) !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.error-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 35px 70px rgba(21, 128, 61, 0.1) !important;
+    border-color: rgba(21, 128, 61, 0.18) !important;
+}
+
+.status-pill {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+.status-indicator-dot {
+    width: 7px;
+    height: 7px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    display: inline-block;
+    animation: blinker 2s infinite ease-in-out;
+}
+
+/* Animations */
+.camping-scene {
+    overflow: visible;
+}
+
+.floating-badge-group {
+    animation: floaty 4.5s ease-in-out infinite;
+}
+
+.fire-flame {
+    animation: flicker .8s ease-in-out infinite alternate;
+    transform-origin: center bottom;
+}
+
+.fire-flame-inner {
+    animation: flicker .5s ease-in-out infinite alternate;
+    transform-origin: center bottom;
+}
+
+@keyframes floaty {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-8px) rotate(3deg);
+    }
+}
+
+@keyframes flicker {
+    0% {
+        transform: scaleX(0.9) scaleY(0.95);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scaleX(1.1) scaleY(1.05);
+        opacity: 1;
+    }
+}
+
+@keyframes blinker {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scale(1.1);
+    }
+}
+
+.error-msg-box {
+    background-color: #f8fafc;
+    border: 1px dashed #cbd5e1;
+}
+
+/* Wider Action Buttons layout rules */
+.btn-action-primary {
+    background-color: #16a34a !important;
+    color: #ffffff !important;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-action-primary:hover {
+    background-color: #15803d !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(22, 163, 74, 0.25) !important;
+}
+
+.btn-action-secondary {
+    background-color: #ffffff !important;
+    color: #334155 !important;
+    border: 1px solid #cbd5e1;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-action-secondary:hover {
+    background-color: #f8fafc !important;
+    border-color: #94a3b8;
+    color: #1e293b !important;
+    transform: translateY(-2px);
+}
+
+/* Minimalist Debugger layout */
+.dev-details summary {
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    font-size: 0.92rem;
+    transition: color 0.2s ease;
+}
+
+.dev-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.dev-details summary:hover {
+    color: #16a34a !important;
+}
+
+.dev-details .toggle-icon {
+    font-size: 0.8rem;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dev-details[open] .toggle-icon {
+    transform: rotate(90deg);
+}
+
+.dev-console-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #1e293b;
+}
+
+.dev-console {
+    background: #0f172a;
+    color: #94a3b8;
+    padding: 1.5rem;
+    max-height: 300px;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    overflow-y: auto;
+    font-family: 'Fira Code', 'Courier New', monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .floating-badge-group,
+    .fire-flame,
+    .fire-flame-inner,
+    .status-indicator-dot {
+        animation: none;
+    }
+
+}

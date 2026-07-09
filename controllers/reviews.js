@@ -4,7 +4,9 @@ const ExpressError = require('../utils/ExpressError');
 
 module.exports.createReview = async (req, res) => {
 
-    const campground = await Campground.findById(req.params.id);
+    const { id } = req.params;
+
+    const campground = await Campground.findById(id);
 
     if (!campground) {
         throw new ExpressError('Campground Not Found', 404);
@@ -24,7 +26,7 @@ module.exports.createReview = async (req, res) => {
 module.exports.deleteReview = async (req, res) => {
     const { id, reviewId } = req.params;
     await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    await Review.findByIdAndDelete(req.params.reviewId);
+    await Review.findByIdAndDelete(reviewId);
     req.flash('success', 'Successfully deleted the review!');
     res.redirect(`/campgrounds/${id}`);
 };

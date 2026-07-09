@@ -9,7 +9,7 @@ const {
     isLoggedIn,
     isReviewAuthor,
     validateReview
-} = require('../middleware');
+} = require('../middleware/JOImiddleware');
 
 // ==========================================
 // Create Review

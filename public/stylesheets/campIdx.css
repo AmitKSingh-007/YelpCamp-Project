@@ -2,23 +2,76 @@ body {
     background-color: #f8f9fa;
 }
 
-.campground-card {
-    transition: all 0.3s ease;
-}
-
-.campground-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 1rem 2rem rgba(0,0,0,.1) !important;
-}
-
 .object-fit-cover {
     object-fit: cover;
+}
+
+.card-text{
+    color:#6c757d;
 }
 
 .card-title {
     color: #212529;
 }
 
+.btn-outline-success {
+    transition: transform .2s ease;
+}
+
 .btn-outline-success:hover {
     transform: translateY(-2px);
+}
+
+.campground-card {
+
+    overflow: hidden;
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+.campground-card:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .12);
+
+}
+
+.campground-card img {
+
+    transition: transform .35s ease-in-out;
+
+}
+
+
+.campground-card:focus-within img {
+    transform: scale(1.04);
+}
+
+#map {
+
+    height: 480px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.campground-image {
+    height: 100%;
+    min-height: 250px;
+}
+
+.image-placeholder {
+    min-height: 250px;
+}
+
+.campground-card:focus-within {
+    transform: translateY(-8px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.12);
 }

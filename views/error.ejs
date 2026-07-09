@@ -1,9 +1,108 @@
 <% layout('layouts/boilerplate') -%>
-    <div class="row">
-        <div class="col-6 offset-3">
-            <div class="alert alert-danger" role="alert">
-                <h4 class="alert-heading"><%= err.message %></h4>
-                <p><%= err.stack %></p>
+
+<link rel="stylesheet" href="/stylesheets/error.css">
+
+<% 
+  const statusCode = err.statusCode || 500;
+  
+  const errorMap = {
+    401: { icon: "lock", title: "Camp Access Required", subtitle: "Please sign in before blazing this trail." },
+    403: { icon: "shield-slash", title: "Trail Closed Area", subtitle: "You don't have permission to access this perimeter." },
+    404: { icon: "compass", title: "Looks Like You're Lost", subtitle: "The trail you're looking for doesn't exist or has been overgrown." },
+    500: { icon: "cloud-lightning-rain", title: "Storming in the Camp", subtitle: "Our counselors are working on fixing an unexpected downpour." }
+  };
+
+  const { icon, title, subtitle } = errorMap[statusCode] || errorMap[500];
+%>
+
+<div class="error-page-wrapper min-vh-100 d-flex align-items-center justify-content-center py-5 px-3 px-sm-4">
+  <div class="nature-bg-elements"></div>
+
+  <div class="row justify-content-center w-100 position-relative z-1">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6">
+
+      <div class="card error-card border-0 rounded-4 overflow-hidden mx-auto">
+        <div class="card-body text-center p-4 p-sm-5 p-md-6">
+
+          <div class="illustration-container mb-4">
+            <svg class="camping-scene" width="260" height="180" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="110" cy="142" rx="95" ry="12" fill="rgba(0,0,0,0.06)" />
+
+              <polygon points="40,140 85,70 130,140" fill="#e2e8f0" opacity="0.7" />
+              <polygon points="90,140 145,50 200,140" fill="#cbd5e1" opacity="0.6" />
+
+              <polygon points="85,70 79,80 91,80" fill="#ffffff" opacity="0.9" />
+              <polygon points="145,50 138,62 152,62" fill="#ffffff" opacity="0.9" />
+
+              <polygon points="60,140 110,80 160,140" fill="#15803d" />
+              <polygon points="110,80 110,140 160,140" fill="#166534" />
+              <polygon points="90,140 110,100 130,140" fill="#fef08a" />
+              <polygon points="110,100 110,140 130,140" fill="#fde047" />
+              <g transform="translate(0, 5)">
+                <path d="M102,143 L118,139 M104,139 L116,143" stroke="#78350f" stroke-width="3.5" stroke-linecap="round" />
+                <path class="fire-flame" d="M105,138 Q110,120 112,125 Q115,115 110,138 Z" fill="#ea580c" />
+                <path class="fire-flame-inner" d="M107,138 Q110,126 111,129 Q113,123 110,138 Z" fill="#facc15" />
+              </g>
+
+              <g class="floating-badge-group">
+                <circle cx="170" cy="55" r="22" fill="#ef4444" />
+                <circle cx="170" cy="55" r="18" fill="#ffffff" />
+                <text x="170" y="63" font-size="24" font-weight="800" fill="#ef4444" text-anchor="middle">!</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill status-pill mb-4">
+            <span class="status-indicator-dot"></span>
+            <span class="fw-bold tracking-wider fs-7">ERROR <%= statusCode %></span>
+          </div>
+
+          <h1 class="display-6 fw-black text-neutral-900 mb-3">
+            <%= title %>
+          </h1>
+
+          <p class="text-muted px-md-5 mb-4 fs-5-light">
+            <%= subtitle %>
+          </p>
+
+          <% if (process.env.NODE_ENV !== "production" && err.message) { %>
+          <div class="error-msg-box text-start p-3.5 mb-5 rounded-3 d-flex align-items-start gap-3 mx-lg-4">
+            <i class="bi bi-info-circle text-success mt-1 fs-5"></i>
+            <div class="font-monospace text-wrap w-100 text-break text-muted fs-7.5">
+              <strong>Details:</strong> <%= err.message %>
             </div>
+          </div>
+          <% } %>
+
+          <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mx-lg-4">
+            <button class="btn btn-action-secondary rounded-3 py-3 px-4 flex-sm-1" onclick="history.back()">
+              <i class="bi bi-arrow-left"></i>
+              <span>Go Back</span>
+            </button>
+
+            <a href="/campgrounds" class="btn btn-action-primary rounded-3 py-3 px-4 shadow-sm flex-sm-1">
+              <i class="bi bi-<%= icon %>"></i>
+              <span>Explore Campgrounds</span>
+            </a>
+          </div>
+
+          <% if(process.env.NODE_ENV !== "production") { %>
+          <details class="dev-details mt-5 text-start border-top pt-4 mx-lg-4">
+            <summary class="fw-bold d-flex align-items-center justify-content-between text-secondary">
+              <span class="d-flex align-items-center gap-2">
+                <i class="bi bi-terminal-dash text-success"></i> Stack Trace Debugger
+              </span>
+              <i class="bi bi-chevron-right toggle-icon"></i>
+            </summary>
+            <div class="dev-console-wrapper mt-3">
+              <pre class="dev-console m-0"><code><%= err.stack %></code></pre>
+            </div>
+          </details>
+          <% } %>
+
         </div>
+      </div>
+
     </div>
+  </div>
+</div>

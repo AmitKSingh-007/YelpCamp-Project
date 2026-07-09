@@ -1,28 +1,32 @@
 const multer = require('multer');
 const path = require('path');
+const crypto = require('crypto');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../public/uploads"));
+        cb(null, path.join(__dirname, "../uploads"));
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + "-" + file.originalname);
+        const uniqueName =
+            `${Date.now()}-${crypto.randomBytes(8).toString("hex")}${path.extname(file.originalname)}`;
+
+        cb(null, uniqueName);
     }
 });
 
-const allowedTypes = [
+const ALLOWED_IMAGE_TYPES = [
     "image/jpeg",
     "image/png",
     "image/webp"
 ];
 
-function fileFilter(req, file, cb) {
+const fileFilter = (req, file, cb) => {
 
-    if (allowedTypes.includes(file.mimetype)) {
-        cb(null, true);
-    } else {
-        cb(new Error("Only JPG, PNG and WebP images are allowed."));
+    if (ALLOWED_IMAGE_TYPES.includes(file.mimetype)) {
+        return cb(null, true);
     }
+
+    cb(new Error("Only JPG, PNG and WebP images are allowed."));
 
 }
 

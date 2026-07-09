@@ -6,17 +6,18 @@ async function uploadImage(filePath) {
     try {
 
         const result = await cloudinary.uploader.upload(filePath, {
-            folder: "YelpCamp"
+            folder: process.env.CLOUDINARY_FOLDER
         });
 
         return {
             url: result.secure_url,
-            filename: result.public_id
+            filename: result.public_id,
         }
 
     } catch (err) {
 
-        throw new Error(`Cloudinary upload failed: ${err.message}`);
+        err.message = `Cloudinary upload failed: ${err.message}`;
+        throw err;
 
     } finally {
 
@@ -38,7 +39,8 @@ async function deleteImage(publicId) {
 
     } catch (err) {
 
-        throw new Error(`Cloudinary delete failed: ${err.message}`);
+        err.message = `Cloudinary delete failed: ${err.message}`;
+        throw err;
 
     }
 }

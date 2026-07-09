@@ -15,6 +15,8 @@ const latLng = [
 
 const map = L.map("map").setView(latLng, 10);
 
+map.scrollWheelZoom.disable();
+
 L.tileLayer(
     `https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=${maptilerApiKey}`,
     {

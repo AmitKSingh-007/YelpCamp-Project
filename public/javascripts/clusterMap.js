@@ -1,5 +1,7 @@
 const map = L.map("map");
 
+map.scrollWheelZoom.disable();
+
 L.tileLayer(
     `https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=${maptilerApiKey}`,
     {
@@ -35,4 +37,8 @@ mapData.forEach(campground => {
 
 map.addLayer(markerCluster);
 
-map.fitBounds(bounds);
+if (bounds.isValid()) {
+    map.fitBounds(bounds);
+} else {
+    map.setView([20, 0], 2); // Default world view
+}

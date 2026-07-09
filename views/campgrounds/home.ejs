@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="/stylesheets/home.css">
 
-<section class="py-5 my-4">
+<section class="py-5 mb-4">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-7">
@@ -14,16 +14,16 @@
           and inspire fellow campers to explore the outdoors.
         </p>
         <div class="mt-5 d-flex gap-3 flex-wrap">
-          <a href="/campgrounds" class="btn btn-success btn-lg rounded-pill px-4">
+          <a href="/campgrounds" class="btn btn-success btn-lg hero-btn">
             Explore Campgrounds →
           </a>
-          <a href="/campgrounds/new" class="btn btn-outline-success btn-lg rounded-pill px-4">
+          <a href="/campgrounds/new" class="btn btn-outline-success btn-lg hero-btn">
             Share a Campground
           </a>
         </div>
       </div>
       <div class="col-lg-5 d-flex justify-content-center mt-4 mt-lg-0">
-        <img src="/images/dave-hoefler-a3e7yEtQxJs-unsplash.jpg" class="img-fluid rounded-4 shadow-lg" alt="A peaceful campsite at sunset">
+        <img src="/images/home.webp" class="hero-image" alt="A peaceful campsite at sunset" loading="eager" decoding="async">
       </div>
     </div>
   </div>
@@ -37,20 +37,21 @@
       </p>
       <h2 class="display-5 fw-bold mb-3"> Adventure Starts Here </h2>
       <p class="lead text-muted mx-auto section-description">
-        Discover handpicked campgrounds loved by our community and find the perfect destination for your
+        Browse handpicked campgrounds loved by our community and find the perfect destination for your
         next outdoor adventure.
       </p>
     </div>
 
     <div class="row g-4">
+      <% if(featuredCampgrounds.length > 0) { %>
       <% featuredCampgrounds.forEach(campground=> { %>
       <div class="col-lg-4 col-md-6">
         <a href="/campgrounds/<%= campground._id %>" class="featured-card">
           <div class="featured-card-image">
             <% if (campground.images && campground.images.length> 0) { %>
-            <img src="<%= campground.images[0].url %>" alt="<%= campground.title %>">
+            <img src="<%= campground.images[0].url %>" alt="Photo of <%= campground.title %>">
             <% } else { %>
-            <img src="/images/fallback-camp.jpg" alt="Campground placeholder image">
+            <img src="/images/fallback-camp.webp" alt="Campground placeholder image">
             <% } %>
           </div>
           <div class="featured-card-content">
@@ -64,6 +65,13 @@
         </a>
       </div>
       <% }) %>
+      <% } else { %>
+      <div class="text-center py-5">
+        <p class="text-muted">
+          No featured campgrounds available yet.
+        </p>
+      </div>
+      <% } %>
     </div>
   </div>
 </section>
@@ -102,7 +110,7 @@
 <section class="py-5 my-5 text-center bg-success text-white rounded-4 shadow-sm cta-banner">
   <div class="container py-4">
     <h2 class="display-5 fw-bold mb-3">Ready for Your Next Adventure?</h2>
-    <p class="lead mb-4 opacity-90 mx-auto" style="max-width: 600px;">
+    <p class="lead mb-4 opacity-90 mx-auto cta-description">
       Join thousands of campers discovering new destinations every day.
     </p>
     <a href="/campgrounds" class="btn btn-light btn-lg rounded-pill px-5 fw-semibold text-success shadow-sm hover-grow">

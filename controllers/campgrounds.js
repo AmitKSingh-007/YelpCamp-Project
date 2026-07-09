@@ -9,7 +9,7 @@ module.exports.index = async (req, res) => {
     const campgrounds = await Campground.find({});
 
     const mapData = campgrounds.map(campground => ({
-        _id : campground._id,
+        _id: campground._id,
         title: campground.title,
         location: campground.location,
         geometry: campground.geometry
@@ -150,10 +150,12 @@ module.exports.updateCampground = async (req, res) => {
 
     }
 
-    if (req.body.deleteImages) {
+    const deleteImages = req.body.deleteImages || [];
 
-        const imagesToDelete = campground.images.filter(
-            image => req.body.deleteImages.includes(image.filename)
+    if (deleteImages.length) {
+
+        const imagesToDelete = campground.images.filter(image =>
+            deleteImages.includes(image.filename)
         );
 
         for (const image of imagesToDelete) {
@@ -161,9 +163,8 @@ module.exports.updateCampground = async (req, res) => {
         }
 
         campground.images = campground.images.filter(
-            image => !imagesToDelete.includes(image)
+            image => !deleteImages.includes(image.filename)
         );
-
     }
 
     await campground.save();

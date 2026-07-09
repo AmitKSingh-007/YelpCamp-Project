@@ -1,46 +1,38 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
-    <div class="container">
+  <div class="container">
 
-        <a class="navbar-brand fw-bold" href="/">
-            <i class="bi bi-tree-fill text-success me-2"></i>
-            YelpCamp
-        </a>
+    <a class="navbar-brand fw-bold" href="/">
+      <i class="bi bi-tree-fill text-success me-2"></i>
+      YelpCamp
+    </a>
 
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav">
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/campgrounds">Explore Campgrounds</a>
-                </li>
-            </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/campgrounds">Explore Campgrounds</a>
+        </li>
+      </ul>
 
-            <div class="navbar-nav align-items-lg-center">
-                <% if(!currentUser) { %>
-                    <a class="nav-link me-lg-2" href="/login">Login</a>
-                    <a class="btn btn-success rounded-pill px-3 mt-2 mt-lg-0" href="/register">Register</a>
-                <% } else { %>
-                    <span class="navbar-text me-lg-3 text-light">
-                        Welcome, <strong><%= currentUser.username %></strong>
-                    </span>
-                    <a class="btn btn-outline-light rounded-pill px-3 mt-2 mt-lg-0" href="/logout">Logout</a>
-                <% } %>
-            </div>
+      <div class="navbar-nav align-items-lg-center">
+        <% if(!currentUser) { %>
+        <a class="nav-link me-lg-2" href="/login">Login</a>
+        <a class="btn btn-success rounded-pill px-3 mt-2 mt-lg-0" href="/register">Register</a>
+        <% } else { %>
+        <span class="navbar-text me-lg-3 text-light">
+          Hi, <strong><%= currentUser.username %></strong>
+        </span>
+        <a class="btn btn-outline-light rounded-pill px-3 mt-2 mt-lg-0" href="/logout">Logout</a>
+        <% } %>
+      </div>
 
-        </div>
     </div>
+  </div>
 </nav>
